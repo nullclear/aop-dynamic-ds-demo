@@ -1,6 +1,4 @@
-package dev.yxy.demo.mapper;
-
-import org.apache.ibatis.annotations.Mapper;
+package dev.yxy.simple.mapper;
 
 import java.util.Map;
 
@@ -12,7 +10,6 @@ import java.util.Map;
  * @update 2022/03/08 0:35
  * @origin aop-dynamic-ds-demo
  */
-@Mapper
 public interface IDeptMapper {
 
     /**

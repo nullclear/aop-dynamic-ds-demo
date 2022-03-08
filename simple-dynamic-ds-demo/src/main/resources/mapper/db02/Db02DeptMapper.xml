@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="dev.yxy.demo.mapper.IDeptMapper">
+<mapper namespace="dev.yxy.simple.mapper.db02.Db02DeptMapper">
 
     <select id="queryOne" resultType="java.util.Map">
         SELECT *
