@@ -12,3 +12,8 @@ ds:
     url: jdbc:mysql://msi:3307/db02?useAffectedRows=true&useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
     username: root
     password: root_mysql
+
+# mybatis plus 配置
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

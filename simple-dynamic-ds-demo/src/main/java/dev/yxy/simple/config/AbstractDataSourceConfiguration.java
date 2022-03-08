@@ -2,6 +2,7 @@ package dev.yxy.simple.config;
 
 import com.baomidou.mybatisplus.autoconfigure.MybatisPlusAutoConfiguration;
 import com.baomidou.mybatisplus.autoconfigure.MybatisPlusProperties;
+import com.baomidou.mybatisplus.core.MybatisConfiguration;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import com.zaxxer.hikari.HikariDataSource;
 import org.apache.ibatis.session.ExecutorType;
@@ -21,6 +22,7 @@ import javax.sql.DataSource;
 
 /**
  * 数据源配置抽象类
+ * NOTE - 2022/03/08 Mybatis自动配置类
  * <p>
  * 数据源自动配置类 {@link DataSourceAutoConfiguration}
  * Hikari 连接池 自动配置类 {@link org.springframework.boot.autoconfigure.jdbc.DataSourceConfiguration.Hikari}
@@ -99,8 +101,16 @@ public abstract class AbstractDataSourceConfiguration {
      */
     protected final SqlSessionFactory createMybatisSqlSessionFactoryBean(DataSource dataSource, String packageName) throws Exception {
         MybatisSqlSessionFactoryBean factory = new MybatisSqlSessionFactoryBean();
+        // 设置数据源
         factory.setDataSource(dataSource);
+        // 设置扫描的文件
         factory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath*:mapper/" + packageName + "/*.xml"));
+        // 引入输出SQL语句的配置
+        MybatisConfiguration configuration = this.properties.getConfiguration();
+        if (configuration == null && !StringUtils.hasText(this.properties.getConfigLocation())) {
+            configuration = new MybatisConfiguration();
+        }
+        factory.setConfiguration(configuration);
         return factory.getObject();
     }
 }
