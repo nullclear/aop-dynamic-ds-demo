@@ -12,8 +12,14 @@
     <groupId>dev.yxy</groupId>
     <artifactId>aop-dynamic-ds-demo</artifactId>
     <version>1.0.0</version>
+    <packaging>pom</packaging>
+
     <name>aop-dynamic-ds-demo</name>
     <description>AOP动态数据源</description>
+
+    <modules>
+        <module>simple-dynamic-ds-demo</module>
+    </modules>
 
     <!-- 工程属性 -->
     <properties>

@@ -11,6 +11,8 @@
     <groupId>dev.yxy.simple</groupId>
     <artifactId>simple-dynamic-ds-demo</artifactId>
     <version>1.0.0</version>
+    <packaging>jar</packaging>
+
     <name>simple-dynamic-ds-demo</name>
     <description>简单动态数据源</description>
 </project>
