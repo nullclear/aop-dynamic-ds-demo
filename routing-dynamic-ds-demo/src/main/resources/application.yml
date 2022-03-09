@@ -1,17 +1,19 @@
 # 自定义数据源
-ds:
-  db01:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    name: db01
-    url: jdbc:mysql://msi:3307/db01?useAffectedRows=true&useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
-    username: root
-    password: root_mysql
-  db02:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    name: db02
-    url: jdbc:mysql://msi:3307/db02?useAffectedRows=true&useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
-    username: root
-    password: root_mysql
+demo:
+  primary: master
+  datasource:
+    master:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      name: master
+      url: jdbc:mysql://msi:3307/db01?useAffectedRows=true&useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+      username: root
+      password: root_mysql
+    slave:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      name: slave
+      url: jdbc:mysql://msi:3307/db02?useAffectedRows=true&useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+      username: root
+      password: root_mysql
 
 # mybatis plus 配置
 mybatis-plus:

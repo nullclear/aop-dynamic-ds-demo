@@ -1,5 +1,6 @@
 package dev.yxy.routing;
 
+import dev.yxy.routing.config.DynamicDataSourceHolder;
 import dev.yxy.routing.mapper.IDeptMapper;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -17,8 +18,10 @@ class RoutingTests {
 
     @Test
     public void testConnect() {
-        if (logger.isInfoEnabled()) {
-            logger.info("[testConnect] - {}", deptMapper.queryOne());
-        }
+        logger.info("[testConnect] - {}", deptMapper.queryOne());
+        DynamicDataSourceHolder.setContext("slave");
+        logger.info("[testConnect] - {}", deptMapper.queryOne());
+        DynamicDataSourceHolder.removeContext();
+        logger.info("[testConnect] - {}", deptMapper.queryOne());
     }
 }
