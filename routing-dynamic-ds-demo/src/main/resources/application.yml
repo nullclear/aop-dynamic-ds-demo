@@ -19,3 +19,8 @@ demo:
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+# 日志等级
+logging:
+  level:
+    dev.yxy: debug

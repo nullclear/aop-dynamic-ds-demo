@@ -33,6 +33,11 @@
     </properties>
 
     <dependencies>
+        <!-- AOP -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
         <!-- Mybatis Plus -->
         <dependency>
             <groupId>com.baomidou</groupId>
