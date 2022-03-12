@@ -1,15 +1,11 @@
 package dev.yxy.simple.config;
 
 import com.baomidou.mybatisplus.autoconfigure.MybatisPlusAutoConfiguration;
-import com.baomidou.mybatisplus.autoconfigure.MybatisPlusProperties;
-import com.baomidou.mybatisplus.core.MybatisConfiguration;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import com.zaxxer.hikari.HikariDataSource;
-import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.ObjectProvider;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
@@ -22,7 +18,7 @@ import javax.sql.DataSource;
 
 /**
  * 数据源配置抽象类
- * NOTE - 2022/03/08 Mybatis自动配置类
+ * NOTE - 2022/03/08 Mybatis自动配置流程
  * <p>
  * 数据源自动配置类 {@link DataSourceAutoConfiguration}
  * Hikari 连接池 自动配置类 {@link org.springframework.boot.autoconfigure.jdbc.DataSourceConfiguration.Hikari}
@@ -37,9 +33,6 @@ import javax.sql.DataSource;
  */
 @SuppressWarnings("JavadocReference")
 public abstract class AbstractDataSourceConfiguration {
-
-    @Autowired
-    private MybatisPlusProperties properties;
 
     /**
      * 数据源属性
@@ -66,12 +59,7 @@ public abstract class AbstractDataSourceConfiguration {
      * SQL 模板
      */
     public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory) {
-        ExecutorType executorType = this.properties.getExecutorType();
-        if (executorType != null) {
-            return new SqlSessionTemplate(sqlSessionFactory, executorType);
-        } else {
-            return new SqlSessionTemplate(sqlSessionFactory);
-        }
+        return new SqlSessionTemplate(sqlSessionFactory);
     }
 
     /**
@@ -105,12 +93,6 @@ public abstract class AbstractDataSourceConfiguration {
         factory.setDataSource(dataSource);
         // 设置扫描的文件
         factory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath*:mapper/" + packageName + "/*.xml"));
-        // 引入输出SQL语句的配置
-        MybatisConfiguration configuration = this.properties.getConfiguration();
-        if (configuration == null && !StringUtils.hasText(this.properties.getConfigLocation())) {
-            configuration = new MybatisConfiguration();
-        }
-        factory.setConfiguration(configuration);
         return factory.getObject();
     }
 }

@@ -3,7 +3,7 @@
 <mapper namespace="dev.yxy.simple.mapper.db02.Db02DeptMapper">
 
     <select id="queryOne" resultType="java.util.Map">
-        SELECT *
+        SELECT db_source
         FROM `dept`
         LIMIT 1;
     </select>

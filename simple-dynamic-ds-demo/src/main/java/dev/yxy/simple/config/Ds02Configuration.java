@@ -22,8 +22,9 @@ import javax.sql.DataSource;
  * @update 2022/3/8 16:54
  * @origin aop-dynamic-ds-demo
  */
+// 为不同的包指定不同的会话
 @MapperScan(basePackages = "dev.yxy.simple.mapper.db02", sqlSessionTemplateRef = "sqlSessionTemplate02")
-@Configuration(proxyBeanMethods = false)
+@Configuration
 public class Ds02Configuration extends AbstractDataSourceConfiguration {
 
     @Bean("db02")

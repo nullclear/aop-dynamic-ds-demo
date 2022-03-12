@@ -31,9 +31,7 @@ class SimpleTests {
     @Test
     public void testList() {
         for (IDeptMapper mapper : list) {
-            if (logger.isWarnEnabled()) {
-                logger.warn("[testList] - {}", mapper.queryOne());
-            }
+            logger.info("[testList] - {}", mapper.queryOne());
         }
     }
 
@@ -41,17 +39,13 @@ class SimpleTests {
     @Transactional(transactionManager = "tx01")
     @Test
     public void testDb01() {
-        if (logger.isWarnEnabled()) {
-            logger.warn("[testDb01] - {}", db01DeptMapper.queryOne());
-        }
+        logger.info("[testDb01] - {}", db01DeptMapper.queryOne());
     }
 
     @Rollback
     @Transactional(transactionManager = "tx02")
     @Test
     public void testDb02() {
-        if (logger.isWarnEnabled()) {
-            logger.warn("[testDb02] - {}", db02DeptMapper.queryOne());
-        }
+        logger.info("[testDb02] - {}", db02DeptMapper.queryOne());
     }
 }

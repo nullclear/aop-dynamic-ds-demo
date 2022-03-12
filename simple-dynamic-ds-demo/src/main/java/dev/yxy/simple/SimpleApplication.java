@@ -8,7 +8,8 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerA
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 /**
- * 简单多数据源参考：https://blog.csdn.net/w57685321/article/details/84143469
+ * NOTE - 2022/03/12 简单动态数据源参考
+ * https://blog.csdn.net/w57685321/article/details/84143469
  */
 @EnableConfigurationProperties(MybatisPlusProperties.class)
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, DataSourceTransactionManagerAutoConfiguration.class})
