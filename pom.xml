@@ -20,6 +20,7 @@
     <modules>
         <module>simple-dynamic-ds-demo</module>
         <module>routing-dynamic-ds-demo</module>
+        <module>advance-dynamic-ds-demo</module>
     </modules>
 
     <!-- 工程属性 -->

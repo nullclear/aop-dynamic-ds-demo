@@ -1,0 +1,48 @@
+# 数据源配置
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      # 连接池名称
+      pool-name: HikariCP
+      # 连接超时时间（10s）
+      connection-timeout: 10000
+      # 校验超时时间（1s）
+      validation-timeout: 1000
+      # 最大空闲时间（60s）
+      idle-timeout: 60000
+      # 最大生命周期（600s）
+      max-lifetime: 600000
+      # 连接池最大值（8核）
+      maximum-pool-size: 20
+      # 连接池最小空闲数量（8核）
+      minimum-idle: 4
+      # 测试语句
+      connection-test-query: SELECT 1
+      # 自动提交
+      auto-commit: true
+    dynamic:
+      primary: master
+      datasource:
+        master:
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          name: master
+          url: jdbc:mysql://msi:3307/db01?useAffectedRows=true&useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+          username: root
+          password: root_mysql
+        slave:
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          name: slave
+          url: jdbc:mysql://msi:3307/db02?useAffectedRows=true&useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+          username: root
+          password: root_mysql
+
+# mybatis plus 配置
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+# 日志等级
+logging:
+  level:
+    dev.yxy: debug
