@@ -1,26 +1,20 @@
-package dev.yxy.advance.mapper;
-
-import com.baomidou.dynamic.datasource.annotation.DS;
-import org.apache.ibatis.annotations.Mapper;
+package dev.yxy.advance.service;
 
 import java.util.Map;
 
 /**
- * 部门表
+ * 部门服务
  *
  * @author atom
- * @create 2022/03/08 0:35
- * @update 2022/03/08 0:35
+ * @create 2022/03/13 17:44
+ * @update 2022/03/13 17:44
  * @origin aop-dynamic-ds-demo
  */
-@DS("master")
-@Mapper
-public interface IDeptMapper {
+public interface IDeptService {
 
     /**
      * 在从库查询一条数据
      */
-    @DS("slave")
     Map<String, String> querySlave();
 
     /**
@@ -29,7 +23,7 @@ public interface IDeptMapper {
     Map<String, String> queryMaster();
 
     /**
-     * 在主库随机插入
+     * 随机插入
      */
     int insertRand();
 }

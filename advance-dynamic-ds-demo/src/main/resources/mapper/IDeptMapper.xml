@@ -5,13 +5,20 @@
     <select id="querySlave" resultType="java.util.Map">
         SELECT db_source
         FROM `dept`
+        ORDER BY deptno DESC
         LIMIT 1;
     </select>
 
     <select id="queryMaster" resultType="java.util.Map">
         SELECT db_source
         FROM `dept`
+        ORDER BY deptno DESC
         LIMIT 1;
     </select>
+
+    <insert id="insertRand">
+        INSERT INTO `dept` (`dname`, `db_source`)
+        VALUES (UUID(), DATABASE());
+    </insert>
 
 </mapper>
