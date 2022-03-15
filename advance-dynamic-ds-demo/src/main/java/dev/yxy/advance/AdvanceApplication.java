@@ -20,10 +20,17 @@ import com.baomidou.dynamic.datasource.tx.LocalTxUtil;
 import org.aopalliance.intercept.MethodInvocation;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.transaction.TransactionAutoConfiguration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
+import org.springframework.transaction.interceptor.TransactionAttribute;
+import org.springframework.transaction.interceptor.TransactionInterceptor;
+import org.springframework.transaction.support.AbstractPlatformTransactionManager;
 import org.springframework.transaction.support.DefaultTransactionStatus;
 
+import java.lang.reflect.Method;
 import java.sql.Connection;
 import java.util.List;
 import java.util.Map;
@@ -63,6 +70,14 @@ import java.util.Map;
  * 负载均衡策略 {@link LoadBalanceDynamicDataSourceStrategy#determineKey(List)}
  * <p>
  * NOTE - 2022/03/14 Spring事务管理
+ * 事务自动配置 {@link TransactionAutoConfiguration}
+ * 事务拦截器 {@link TransactionInterceptor#invoke(MethodInvocation)}
+ * 事务拦截 {@link TransactionInterceptor#invokeWithinTransaction(Method, Class, TransactionAspectSupport.InvocationCallback)}
+ * 创建事务 {@link TransactionInterceptor#createTransactionIfNecessary(PlatformTransactionManager, TransactionAttribute, String)}
+ * 获取事务 {@link DataSourceTransactionManager#getTransaction(TransactionDefinition)}
+ * 处理已存在的事务 {@link DataSourceTransactionManager#handleExistingTransaction(TransactionDefinition, Object, boolean)}
+ * 或者开启新事务 {@link DataSourceTransactionManager#startTransaction(TransactionDefinition, Object, boolean, AbstractPlatformTransactionManager.SuspendedResourcesHolder)}
+ * 挂起事务 {@link DataSourceTransactionManager#suspend(Object)}
  * 开始事务 {@link DataSourceTransactionManager#doBegin(Object, TransactionDefinition)}
  * 提交事务 {@link DataSourceTransactionManager#doCommit(DefaultTransactionStatus)}
  * 回滚事务 {@link DataSourceTransactionManager#doRollback(DefaultTransactionStatus)}
