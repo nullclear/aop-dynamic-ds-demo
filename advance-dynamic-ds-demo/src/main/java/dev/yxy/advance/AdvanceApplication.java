@@ -24,6 +24,7 @@ import org.springframework.boot.autoconfigure.transaction.TransactionAutoConfigu
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.interceptor.AbstractFallbackTransactionAttributeSource;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.transaction.interceptor.TransactionAttribute;
 import org.springframework.transaction.interceptor.TransactionInterceptor;
@@ -72,7 +73,12 @@ import java.util.Map;
  * NOTE - 2022/03/14 Spring事务管理
  * 事务自动配置 {@link TransactionAutoConfiguration}
  * 事务拦截器 {@link TransactionInterceptor#invoke(MethodInvocation)}
- * 事务拦截 {@link TransactionInterceptor#invokeWithinTransaction(Method, Class, TransactionAspectSupport.InvocationCallback)}
+ * 事务拦截 {@link TransactionInterceptor#invokeWithinTransaction(Method, Class, TransactionAspectSupport.InvocationCallback)} 334行
+ * If the transaction attribute is null, the method is non-transactional.
+ * 获取事务属性 {@link AbstractFallbackTransactionAttributeSource#getTransactionAttribute(Method, Class)} 112行
+ * Don't allow no-public methods as required.
+ * NOTE - 2022/04/19 此处明确了 Spring 事务方法必须是 Public 级别
+ * 计算事务属性 {@link AbstractFallbackTransactionAttributeSource#computeTransactionAttribute(Method, Class)} 153行
  * 创建事务 {@link TransactionInterceptor#createTransactionIfNecessary(PlatformTransactionManager, TransactionAttribute, String)}
  * 获取事务 {@link DataSourceTransactionManager#getTransaction(TransactionDefinition)}
  * 处理已存在的事务 {@link DataSourceTransactionManager#handleExistingTransaction(TransactionDefinition, Object, boolean)}
