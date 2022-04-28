@@ -18,12 +18,15 @@ import java.util.Optional;
 
 /**
  * 数据源切面
+ * <p>
+ * 由于 mapper 是接口，只能使用 JDK 动态代理 {@link org.springframework.aop.framework.JdkDynamicAopProxy#invoke(Object, Method, Object[])}
  *
  * @author atom
  * @create 2022/03/10 23:30
  * @update 2022/03/10 23:30
  * @origin aop-dynamic-ds-demo
  */
+@SuppressWarnings("JavadocReference")
 @Aspect
 @Component
 public class DataSourceAspect {
