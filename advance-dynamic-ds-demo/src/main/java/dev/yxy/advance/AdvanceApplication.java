@@ -24,12 +24,15 @@ import org.springframework.boot.autoconfigure.transaction.TransactionAutoConfigu
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.interceptor.AbstractFallbackTransactionAttributeSource;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.transaction.interceptor.TransactionAttribute;
 import org.springframework.transaction.interceptor.TransactionInterceptor;
 import org.springframework.transaction.support.AbstractPlatformTransactionManager;
 import org.springframework.transaction.support.DefaultTransactionStatus;
+import org.springframework.transaction.support.TransactionSynchronization;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import java.lang.reflect.Method;
 import java.sql.Connection;
@@ -87,6 +90,11 @@ import java.util.Map;
  * 开始事务 {@link DataSourceTransactionManager#doBegin(Object, TransactionDefinition)}
  * 提交事务 {@link DataSourceTransactionManager#doCommit(DefaultTransactionStatus)}
  * 回滚事务 {@link DataSourceTransactionManager#doRollback(DefaultTransactionStatus)}
+ *
+ * NOTE - 2022/6/17 事务同步操作
+ * 注册事务同步 {@link TransactionSynchronizationManager#registerSynchronization(TransactionSynchronization)}
+ * 获取事务同步 {@link TransactionSynchronizationManager#getSynchronizations()}
+ * 执行入口 {@link AbstractPlatformTransactionManager#commit(TransactionStatus)}
  */
 @SuppressWarnings("ALL")
 @SpringBootApplication
